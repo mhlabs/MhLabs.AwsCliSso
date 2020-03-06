@@ -9,19 +9,19 @@ using System.Threading.Tasks;
 
 namespace MhLabs.AwsCliSso.Service
 {
-    public class AwsFileCacheService
+    public class AwsFileCache
     {
         public RegisteredClient Config { get; set; }
 
         private readonly string _workingDir;
 
-        public AwsFileCacheService() : this("boto", "cache")
+        public AwsFileCache() : this("boto", "cache")
         {
         }
 
-        public AwsFileCacheService(params string[] path)
+        public AwsFileCache(params string[] path)
         {
-            var home = Environment.GetEnvironmentVariable("HOME");
+            var home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             string[] ss = new string[path.Length + 2];
             ss[0] = home;
             ss[1] = ".aws";
@@ -30,7 +30,7 @@ namespace MhLabs.AwsCliSso.Service
             _workingDir = Path.Combine(ss);
         }
 
-        private bool Contains(string key)
+        public bool Contains(string key)
         {
             var fullPath = ConvertCacheKey(key);
             return File.Exists(fullPath);

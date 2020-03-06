@@ -13,15 +13,15 @@ namespace MhLabs.AwsCliSso
     public class AwsCliSsoService
     {
         private readonly RegionEndpoint _region;
-        private readonly AwsFileCacheService _awsCliCache;
+        private readonly AwsFileCache _awsCliCache;
         private readonly AwsSsoOidcService _awsSsoOidc;
 
         public AwsCliSsoService(RegionEndpoint region)
-            : this(region, new AwsFileCacheService("cli", "cache"))
+            : this(region, new AwsFileCache("cli", "cache"))
         {
         }
 
-        public AwsCliSsoService(RegionEndpoint region, AwsFileCacheService cliCache)
+        public AwsCliSsoService(RegionEndpoint region, AwsFileCache cliCache)
         {
             _region = region;
             _awsCliCache = cliCache;
@@ -29,7 +29,7 @@ namespace MhLabs.AwsCliSso
             _awsSsoOidc = new AwsSsoOidcService(region);
         }
 
-        public AwsCliSsoService(RegionEndpoint region, AwsFileCacheService cliCache, AwsFileCacheService oidcCache)
+        public AwsCliSsoService(RegionEndpoint region, AwsFileCache cliCache, AwsFileCache oidcCache)
         {
             _region = region;
             _awsCliCache = cliCache;
@@ -47,7 +47,7 @@ namespace MhLabs.AwsCliSso
                 { "roleName", roleName },
                 { "startUrl", startUrl },
             };
-            return AwsFileCacheService.GetSha1(JsonConvert.SerializeObject(profileConfig, Formatting.None));
+            return AwsFileCache.GetSha1(JsonConvert.SerializeObject(profileConfig, Formatting.None));
         }
 
         public async Task<AWSCredentials> GetCredentials(string startUrl, string accountId, string roleName)

@@ -14,15 +14,15 @@ namespace MhLabs.AwsCliSso.Service
         private const string TOKEN_GRANT_TYPE = "urn:ietf:params:oauth:grant-type:device_code";
 
         private readonly RegionEndpoint _region;
-        private readonly AwsFileCacheService _awsSsoCache;
+        private readonly AwsFileCache _awsSsoCache;
         private readonly AmazonSSOOIDCClient _SSOOIDCClient;
 
         public AwsSsoOidcService(RegionEndpoint region)
-            : this(region, new AwsFileCacheService("sso", "cache"))
+            : this(region, new AwsFileCache("sso", "cache"))
         {
         }
 
-        public AwsSsoOidcService(RegionEndpoint region, AwsFileCacheService awsCacheService)
+        public AwsSsoOidcService(RegionEndpoint region, AwsFileCache awsCacheService)
         {
             _region = region;
             _awsSsoCache = awsCacheService;
@@ -58,7 +58,7 @@ namespace MhLabs.AwsCliSso.Service
 
         public async Task<Authorization> AuthorizeClient(string startUrl, RegisteredClient client)
         {
-            var cacheKey = AwsFileCacheService.GetSha1(startUrl);
+            var cacheKey = AwsFileCache.GetSha1(startUrl);
             var authorization = _awsSsoCache.GetItem<Authorization>(cacheKey);
 
             if (authorization.expiresAt > DateTime.Now)
