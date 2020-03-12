@@ -64,7 +64,7 @@ namespace MhLabs.AwsCliSso
 
             var authorization = await _awsSsoOidc.AuthorizeClient(startUrl, client);
 
-            using var ssoClient = new Amazon.SSO.AmazonSSOClient(_region);
+            using var ssoClient = new Amazon.SSO.AmazonSSOClient(new AnonymousAWSCredentials(), _region);
 
             var creds = await ssoClient.GetRoleCredentialsAsync(new GetRoleCredentialsRequest
             {

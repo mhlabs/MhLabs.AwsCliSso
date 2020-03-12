@@ -1,4 +1,5 @@
 ﻿using Amazon;
+using Amazon.Runtime;
 using Amazon.SSOOIDC;
 using Amazon.SSOOIDC.Model;
 using MhLabs.AwsCliSso.Helper;
@@ -27,7 +28,7 @@ namespace MhLabs.AwsCliSso.Service
             _region = region;
             _awsSsoCache = awsCacheService;
 
-            _SSOOIDCClient = new AmazonSSOOIDCClient(new AmazonSSOOIDCConfig
+            _SSOOIDCClient = new AmazonSSOOIDCClient(new AnonymousAWSCredentials(), new AmazonSSOOIDCConfig
             {
                 RegionEndpoint = region
             });
