@@ -64,15 +64,19 @@ namespace MhLabs.AwsCliSso.Service
                 Directory.CreateDirectory(_workingDir);
             }
 
-            using var sw = File.CreateText(fullkey);
-            await sw.WriteAsync(fileContent);
+            using (var sw = File.CreateText(fullkey))
+            {
+                await sw.WriteAsync(fileContent);
+            }
         }
 
         public static string GetSha1(string url)
         {
-            using var sha1 = new SHA1Managed();
-
-            var hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(url));
+            byte[] hash;
+            using (var sha1 = new SHA1Managed())
+            {
+                hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(url));
+            }
 
             var sb = new StringBuilder(hash.Length * 2);
 

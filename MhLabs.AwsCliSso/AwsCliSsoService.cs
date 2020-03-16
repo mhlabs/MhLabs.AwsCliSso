@@ -64,14 +64,16 @@ namespace MhLabs.AwsCliSso
 
             var authorization = await _awsSsoOidc.AuthorizeClient(startUrl, client);
 
-            using var ssoClient = new Amazon.SSO.AmazonSSOClient(new AnonymousAWSCredentials(), _region);
-
-            var creds = await ssoClient.GetRoleCredentialsAsync(new GetRoleCredentialsRequest
+            GetRoleCredentialsResponse creds;
+            using (var ssoClient = new Amazon.SSO.AmazonSSOClient(new AnonymousAWSCredentials(), _region))
             {
-                AccessToken = authorization.accessToken,
-                AccountId = accountId,
-                RoleName = roleName
-            });
+                creds = await ssoClient.GetRoleCredentialsAsync(new GetRoleCredentialsRequest
+                {
+                    AccessToken = authorization.accessToken,
+                    AccountId = accountId,
+                    RoleName = roleName
+                });
+            }
 
             await _awsCliCache.SetItem(cacheKey, new SSOProviderCredentials(creds.RoleCredentials));
 
