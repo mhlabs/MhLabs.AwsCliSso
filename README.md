@@ -1,6 +1,9 @@
 # MhLabs.AwsCliSso
 Simplify usage of Aws SSO in your local projects
 
+## Deprecated
+There is official support to accomplish this in AWSSDK.Core Version >= 3.5.2.
+
 # Example usage
 ```csharp
 var service = new AwsCliSsoService(RegionEndpoint.EUWest1);
