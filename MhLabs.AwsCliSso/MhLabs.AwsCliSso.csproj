@@ -9,7 +9,7 @@
     <PackageReference Include="AWSSDK.Core" Version="3.7.3.22" />
     <PackageReference Include="AWSSDK.SSO" Version="3.7.0.82" />
     <PackageReference Include="AWSSDK.SSOOIDC" Version="3.7.0.82" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
 </Project>
