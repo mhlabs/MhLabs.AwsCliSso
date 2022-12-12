@@ -13,10 +13,8 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="LICENSE.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="LICENSE.txt" Pack="true" Visible="false" PackagePath=""/>
+	</ItemGroup>
 
 </Project>
